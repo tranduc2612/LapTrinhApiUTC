@@ -1,0 +1,20 @@
+.form__login{
+    width:70%;
+    height: 100%;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 0 auto;
+}
+
+.btn{
+    cursor: pointer;
+    width:50%;
+    margin: 0 auto;
+    padding:10px;
+    border-radius: 10px;
+}
+
+.form-control.error{
+    border-color: red;
+    outline: 1px solid red;
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+		<link
+			href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css"
+			rel="stylesheet"
+		/>
+		<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css"
+			type="text/css"
+		/>
+		<style>
+			#buttons {
+				width: 90%;
+				margin: 0 auto;
+				position: absolute;
+				bottom: 10px;
+			}
+			.button {
+				display: inline-block;
+				position: relative;
+				cursor: pointer;
+				width: 20%;
+				padding: 8px;
+				border-radius: 3px;
+				margin-top: 10px;
+				font-size: 12px;
+				text-align: center;
+				color: #fff;
+				background: #ee8a65;
+				font-family: sans-serif;
+				font-weight: bold;
+			}
+		</style>
+
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="map" style="width: 100vw; height: 100vh"></div>
+
+		<div id="info">
+			<p id="distance"></p>
+			<p id="duration"></p>
+		</div>
+		<ul id="buttons">
+			<li id="button-fr" class="button">French</li>
+			<li id="button-ru" class="button">Russian</li>
+			<li id="button-de" class="button">German</li>
+			<li id="button-es" class="button">Spanish</li>
+		</ul>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+			integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			mapboxgl.accessToken =
+				"pk.eyJ1IjoibHhxMjMwOSIsImEiOiJjbGZ2dGJoMXcwYWNrM2dubDVlZmlvaWU5In0.9iYxJy_FOPbJCi60CdZgLg";
+			const map = new mapboxgl.Map({
+				container: "map",
+				style: "mapbox://styles/mapbox/streets-v12",
+				center: [105.834161, 21.0277763],
+				zoom: 18,
+			});
+
+			var marker = new mapboxgl.Marker({
+				color: "red",
+				draggable: true,
+				anchor: "top",
+				bounds: true,
+			});
+
+			// var popup = new mapboxgl.Popup({
+			// 	anchor: "right",
+			// 	closeButton: true,
+			// });
+
+			// popup.setLngLat([105.834161, 21.0277763]);
+			// popup.setHTML("<h1>Hello Hà nội</h1>");
+			// popup.addTo(map);
+			function checkInMap(lng, lat) {
+				const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?limit=1&access_token=${mapboxgl.accessToken}`;
+				fetch(url)
+					.then((response) => response.json())
+					.then((data) => {
+						var address = data.features[0].place_name;
+						console.log(address);
+					});
+			}
+
+			map.on("click", (e) => {
+				marker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
+				marker.addTo(map);
+				checkInMap(e.lngLat.lng, e.lngLat.lat);
+			});
+
+			const nav = new mapboxgl.NavigationControl({
+				visualizePitch: true,
+			});
+			const geolocate = new mapboxgl.GeolocateControl({
+				positionOptions: {
+					enableHighAccuracy: true,
+				},
+				trackUserLocation: true,
+				showUserHeading: true,
+			});
+			map.addControl(geolocate, "top-right");
+			map.addControl(nav, "top-right");
+
+			const myMaker = new mapboxgl.Marker({
+				color: "red",
+				draggable: true,
+				anchor: "top",
+				bounds: true,
+			});
+
+			// lấy ra vị trí hiện tại đang đứng
+			geolocate.once("geolocate", function (position) {
+				const latitude = position.coords.latitude;
+				const longitude = position.coords.longitude;
+				console.log("lat, lng", latitude, longitude);
+
+				myMaker.setLngLat([longitude, latitude]);
+				myMaker.addTo(map);
+
+				var url =
+					"https://api.mapbox.com/directions/v5/mapbox/driving/" +
+					longitude +
+					"," +
+					latitude +
+					";" +
+					marker._lngLat.lng +
+					"," +
+					marker._lngLat.lat +
+					"?steps=true&geometries=geojson&access_token=" +
+					mapboxgl.accessToken;
+
+				fetch(url)
+					.then((response) => response.json())
+					.then((data) => {
+						var route = data.routes[0].geometry.coordinates;
+						var geojson = {
+							type: "Feature",
+							properties: {},
+							geometry: {
+								type: "LineString",
+								coordinates: route,
+							},
+						};
+
+						map.addLayer({
+							id: "route",
+							type: "line",
+							source: {
+								type: "geojson",
+								data: geojson,
+							},
+							layout: {
+								"line-join": "round",
+								"line-cap": "round",
+							},
+							paint: {
+								"line-color": "#f73a29",
+								"line-width": 8,
+							},
+						});
+						var distance = data.distance;
+						var duration = data.duration;
+						document.getElementById("distance").innerHTML =
+							"Distance: " + (distance / 1000).toFixed(1) + "km";
+						document.getElementById("duration").innerHTML =
+							"Duration: " + (duration / 60).toFixed(1) + "min";
+					})
+					.catch((error) => error.json);
+			});
+
+			const direct = new MapboxDirections({
+				accessToken: mapboxgl.accessToken,
+				unit: "metric",
+				controls: {
+					inputs: true,
+					instructions: true,
+				},
+			});
+
+			direct.addWaypoint("Điểm 1", [105.834161, 21.0277763]);
+			map.addControl(direct, "top-left");
+			map.addControl(new mapboxgl.FullscreenControl());
+
+			direct.on("");
+			console.log(direct.getWaypoints());
+
+			// const mulWay = [
+			// 	{
+			// 		coordinates: [105.834161, 21.0277763],
+			// 		name: "Điểm 1",
+			// 	},
+			// 	{
+			// 		coordinates: [105.83416, 21.027776],
+			// 		name: "Điểm 2",
+			// 	},
+			// 	{
+			// 		coordinates: [105.83416, 21.027776],
+			// 		name: "Điểm 3",
+			// 	},
+			// ];
+
+			// mulWay.forEach((element, index) => {
+			// 	direct.setWaypoint(index, element.coordinates);
+			// });
+
+			document.getElementById("buttons").addEventListener("click", (event) => {
+				const language = event.target.id.substr("button-".length);
+				console.log(language);
+				map.setLayoutProperty("country-label", "text-field", [
+					"get",
+					`name_${language}`,
+				]);
+
+				map.setLanguage(language);
+			});
+		</script>
+	</body>
+</html>

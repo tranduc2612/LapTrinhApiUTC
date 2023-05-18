@@ -1,0 +1,5 @@
+﻿  bai12_TranMinhDuc.cpp
+C:\Users\OSC\Desktop\winform\bai12_TranMinhDuc\bai12_TranMinhDuc\bai12_TranMinhDuc.cpp(142,27): warning C4312: 'type cast': conversion from 'int' to 'HMENU' of greater size
+C:\Users\OSC\Desktop\winform\bai12_TranMinhDuc\bai12_TranMinhDuc\bai12_TranMinhDuc.cpp(147,26): warning C4312: 'type cast': conversion from 'int' to 'HMENU' of greater size
+C:\Users\OSC\Desktop\winform\bai12_TranMinhDuc\bai12_TranMinhDuc\bai12_TranMinhDuc.cpp(148,27): warning C4312: 'type cast': conversion from 'int' to 'HMENU' of greater size
+  bai12_TranMinhDuc.vcxproj -> C:\Users\OSC\Desktop\winform\bai12_TranMinhDuc\x64\Debug\bai12_TranMinhDuc.exe

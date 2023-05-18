@@ -1,0 +1,15 @@
+.user-action{
+    position: absolute;
+    width: 100%;
+    background-color:red;
+}
+
+.user-action ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-action ul li {
+    padding: 10px;
+}

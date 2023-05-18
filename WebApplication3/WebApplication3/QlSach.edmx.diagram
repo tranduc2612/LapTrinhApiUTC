@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="882b3903f814433c9970f58317a22c96" Name="Diagram1">
+        <EntityTypeShape EntityType="QLBanSachModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tChiTietHDB" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tChiTietHDN" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tHoaDonBan" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tHoaDonNhap" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tKhachHang" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tNhaCungCap" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tNhanVien" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tNhaXuatBan" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tSach" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBanSachModel.tTheLoai" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="QLBanSachModel.FK_tChiTietHDB_tHoaDonBan" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tChiTietHDB_tSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tChiTietHDN_tHoaDonNhap" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tChiTietHDN_tSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tHoaDonBan_tKhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tHoaDonBan_tNhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tHoaDonNhap_tNhaCungCap" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tHoaDonNhap_tNhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tSach_tNhaXuatBan" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBanSachModel.FK_tSach_tTheLoai" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

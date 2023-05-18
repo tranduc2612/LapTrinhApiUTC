@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLNhanVien" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MSI\SQLEXPRESS;Initial Catalog=QLNhanVien;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLNhanVienConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tNhanVien" Member="tNhanViens">
+    <Type Name="tNhanVien">
+      <Column Name="MaNV" Type="System.String" DbType="NVarChar(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HO" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="TEN" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="PHAI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NTNS" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NgayBD" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MaPB" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="HINH" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="GHICHU" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tHangHoa" Member="tHangHoas">
+    <Type Name="tHangHoa">
+      <Column Name="MaHang" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenHang" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaKichThuoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaCongDung" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaLoaiMen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaHinhKhoi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaHoaVan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaMau" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaNuoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DonGiaNhap" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DonGiaBan" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ThoiGianBaoHanh" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="GhiChu" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

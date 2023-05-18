@@ -1,0 +1,4 @@
+﻿  bai2.cpp
+C:\Users\OSC\Desktop\winform\bai2\bai2\bai2.cpp(130,17): warning C4101: 'hdc': unreferenced local variable
+C:\Users\OSC\Desktop\winform\bai2\bai2\bai2.cpp(131,17): warning C4101: 'ps': unreferenced local variable
+  bai2.vcxproj -> C:\Users\OSC\Desktop\winform\bai2\x64\Debug\bai2.exe
